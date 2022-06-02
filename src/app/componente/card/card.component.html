@@ -1,0 +1,29 @@
+
+
+
+<div class="container" style="width: 40rem">
+  <table class="table table-hover ">
+    <thead>
+      <tr>
+        <th scope="col" class="ancho">No.</th>
+        <th scope="col" >Pais</th>
+        <th scope="col" >Capital </th>
+        <th scope="col" >Bandera</th>
+      </tr>
+    </thead>
+
+    <tbody *ngFor="let item of datosApi | paginate: {itemsPerPage: 3, currentPage: pages } ; let index= index"   >
+      <tr>
+        <td>{{index+1}}</td>
+        <td>{{item.name.official}}</td>
+        <td *ngIf="item.capital ; else sinCapital"> {{item.capital[0]}}</td>
+        <ng-template #sinCapital>
+          <h2 class="text-center"> No tiene capital</h2>
+        </ng-template>
+        <td> <img src="{{item.flags.png}}" class="card-img-top" alt="..."></td>
+      </tr>
+    </tbody>
+   
+  </table>
+  <pagination-controls (pageChange)="pages = $event"></pagination-controls>
+</div>
